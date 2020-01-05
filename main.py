@@ -2,6 +2,36 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
+from fpdf import FPDF
+
+
+def _save_as_txt(file_name, paragraphs):
+    with open(f"{file_name}.txt", "w") as f:
+        for paragraph in paragraphs:
+            cues = paragraph["cues"]
+            for cue in cues:
+                text = cue["text"].replace("\n", "") + "\n"
+                f.writelines(text)
+
+            f.writelines("\n")
+
+
+def _save_as_pdf(file_name, paragraphs):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.add_font("NanumSquareR", "", "NanumSquareR.ttf", uni=True)  # 한글 작성이 가능한 폰트 추가
+    pdf.set_font("NanumSquareR", size=12)
+
+    for paragraph in paragraphs:
+        cues = paragraph["cues"]
+        for cue in cues:
+            text = cue["text"].replace("\n", "")
+            pdf.cell(200, 10, txt=text.encode("utf-8").decode(), ln=1)
+
+        pdf.cell(200, 10, txt="\n", ln=1)
+
+    pdf.output(f"{talks}_{language}.pdf")
+    pdf.close()
 
 
 def main(link):
@@ -18,20 +48,15 @@ def main(link):
     script = "https://www.ted.com/talks/{id}/transcript.json?language={language}"
 
     for language in languages:
-        with open(f"{talks}_{language}.txt", "w") as f:
-            _link = script.format(id=script_id, language=language)
-            response = requests.get(_link)
-            result = response.json()
-            paragraphs = result["paragraphs"]
-            for paragraph in paragraphs:
-                cues = paragraph["cues"]
-                for cue in cues:
-                    text = cue["text"].replace("\n", "") + "\n"
-                    f.writelines(text)
+        file_name = f"{talks}_{language}"
+        _link = script.format(id=script_id, language=language)
+        response = requests.get(_link)
+        result = response.json()
+        paragraphs = result["paragraphs"]
 
-                f.writelines("\n")
+        _save_as_pdf(file_name, paragraphs)        
 
 
 if __name__ == "__main__":
-    link = ""  # Enter the TED talks link
+    link = "https://www.ted.com/talks/kai_fu_lee_how_ai_can_save_our_humanity"  # Enter the TED talks link
     main(link)
