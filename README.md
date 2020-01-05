@@ -1,4 +1,4 @@
-### TED-script-crawler.git
+## TED-script-crawler.git
 
 
 TED 강연 스크립트를 txt파일로 저장합니다.
