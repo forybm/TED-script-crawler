@@ -30,7 +30,7 @@ def _save_as_pdf(file_name, paragraphs):
 
         pdf.cell(200, 10, txt="\n", ln=1)
 
-    pdf.output(f"{talks}_{language}.pdf")
+    pdf.output(f"{file_name}.pdf")
     pdf.close()
 
 
@@ -58,5 +58,5 @@ def main(link):
 
 
 if __name__ == "__main__":
-    link = ""  # Enter the TED talks link
+    link = "https://www.ted.com/talks/kai_fu_lee_how_ai_can_save_our_humanity"  # Enter the TED talks link
     main(link)
