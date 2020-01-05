@@ -25,7 +25,7 @@ def _save_as_pdf(file_name, paragraphs):
     for paragraph in paragraphs:
         cues = paragraph["cues"]
         for cue in cues:
-            text = cue["text"].replace("\n", "")
+            text = cue["text"].replace("\n", " ")
             pdf.cell(200, 10, txt=text.encode("utf-8").decode(), ln=1)
 
         pdf.cell(200, 10, txt="\n", ln=1)
@@ -58,5 +58,5 @@ def main(link):
 
 
 if __name__ == "__main__":
-    link = "https://www.ted.com/talks/kai_fu_lee_how_ai_can_save_our_humanity"  # Enter the TED talks link
+    link = ""  # Enter the TED talks link
     main(link)
