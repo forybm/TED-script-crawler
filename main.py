@@ -1,4 +1,5 @@
 import re
+import sys
 
 import requests
 from bs4 import BeautifulSoup
@@ -58,5 +59,5 @@ def main(link):
 
 
 if __name__ == "__main__":
-    link = "https://www.ted.com/talks/kai_fu_lee_how_ai_can_save_our_humanity"  # Enter the TED talks link
+    link = sys.argv[1]
     main(link)

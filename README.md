@@ -11,18 +11,10 @@ TED 강연 스크립트를 txt파일 또는 pdf파일 저장합니다.
 > pip install -r requirements.txt
 ```
 
-### 크롤링할 테드링크 입력하기
-
-```
-# main.py
-
-if __name__ == "__main__":
-    link = ""  # Enter the TED talks link
-```
-
 ### 실행
 ```
-> python3 main.py
+> python3 main.py <ted link>
+# ex) python3 main.py https://www.ted.com/talks/katrina_spade_when_i_die_recompose_me
 ```
 
 
